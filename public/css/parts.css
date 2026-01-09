@@ -591,3 +591,104 @@
   /*hoverした時の変化*/
   opacity: 1; /*透過なしに変化*/
 }
+/*　7-9 波紋　*/
+
+.circle span.mask {
+  position: relative; /*波紋の基点となる位置を定義*/
+}
+
+.circle span.mask::before {
+  position: absolute;
+  content: "";
+  transform: scale(0); /*円の大きさ初期値は0*/
+  opacity: 0; /*透過0*/
+  width: 100%; /*円のサイズ指定*/
+  height: 100%; /*円のサイズ指定*/
+  border-radius: 50%; /*円の角丸指定*/
+  background: rgba(255, 255, 255, 0.2); /*円の背景色*/
+}
+
+.circle span.mask:hover::before {
+  /*hoverした時の変化*/
+  animation: circle 0.75s; /*アニメーションの名前と速度を定義*/
+}
+
+@keyframes circle {
+  0% {
+    transform: scale(0);
+    opacity: 1; /*透過なし*/
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2); /*アニメーションで大きくなった2倍の円の指定*/
+  }
+}
+/*==================================================
+機能編　8-1-4	ページ内にある指定の範囲内で下から出現
+===================================*/
+
+/*リンクの形状*/
+#page-top a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e2a2b1;
+  width: 60px;
+  height: 50px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.6rem;
+  transition: all 0.3s;
+}
+
+#page-top a:hover {
+  background: #999;
+  height: 55px;
+}
+
+/*リンクを右下に固定*/
+#page-top {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  /*はじめは非表示*/
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+/*　上に上がる動き　*/
+
+#page-top.UpMove {
+  animation: UpAnime 0.5s forwards;
+}
+@keyframes UpAnime {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*　下に下がる動き　*/
+
+#page-top.DownMove {
+  animation: DownAnime 0.5s forwards;
+}
+@keyframes DownAnime {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(100px);
+  }
+}
